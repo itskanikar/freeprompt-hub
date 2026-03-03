@@ -3,27 +3,29 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>FreePrompt Hub | Free AI Prompts for Creators</title>
+    <title>FreePrompt Hub | Dynamic</title>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
-    <div class="bg-animated" id="bg-animated"></div>
+    <div id="loader" class="loader-container">
+        <div class="spinner"></div>
+        <p>Loading Prompts...</p>
+    </div>
 
-    <header id="header">
+    <div id="toast-container" class="toast-container"></div>
+
+    <div class="bg-animated"></div>
+
+    <header id="header" class="glass-nav">
         <div class="nav-container">
             <div class="logo">
                 <i class="fa-solid fa-wand-magic-sparkles"></i> FreePrompt Hub
             </div>
-            <button class="mobile-menu-btn" id="mobile-menu-btn">
-                <i class="fa-solid fa-bars"></i>
-            </button>
-            <nav id="nav-menu">
-                <a href="#home" class="nav-link">Home</a>
-                <a href="#categories" class="nav-link">Categories</a>
-                <a href="#prompts" class="nav-link">Prompts</a>
-                <a href="#about" class="nav-link">About</a>
+            <nav class="nav-links">
+                <a href="#home">Home</a>
+                <a href="#prompts-section">Prompts</a>
                 <button id="theme-toggle" class="icon-btn" aria-label="Toggle Theme">
                     <i class="fa-solid fa-sun" id="theme-icon"></i>
                 </button>
@@ -32,80 +34,45 @@
     </header>
 
     <main>
-        <section id="home" class="hero fade-in">
+        <section id="home" class="hero fade-in-scroll">
             <h1 class="hero-title">Free AI Prompts for <span class="text-gradient">Creators</span></h1>
-            <p class="hero-desc">Discover, copy, and save high-quality prompts for ChatGPT, Midjourney, Claude, and more. Boost your workflow today.</p>
+            <p class="hero-desc">Discover, save, and copy high-quality prompts to supercharge your AI workflow.</p>
             
-            <div class="search-container glass-panel">
+            <div class="search-wrapper glass-panel">
                 <i class="fa-solid fa-search search-icon"></i>
-                <input type="text" id="search-input" placeholder="Search prompts (e.g., 'React landing page', 'cinematic photo')...">
+                <input type="text" id="search-input" placeholder="Search prompts by title or content...">
             </div>
         </section>
 
-        <section id="categories" class="fade-in">
-            <h2 class="section-title">Browse Categories</h2>
-            <div class="category-grid">
-                <div class="category-card glass-panel" data-category="video">
-                    <i class="fa-solid fa-video category-icon"></i>
-                    <h3>Video</h3>
-                    <p>Sora, Runway & Pika</p>
-                </div>
-                <div class="category-card glass-panel" data-category="image">
-                    <i class="fa-solid fa-image category-icon"></i>
-                    <h3>Image</h3>
-                    <p>Midjourney & DALL-E</p>
-                </div>
-                <div class="category-card glass-panel" data-category="music">
-                    <i class="fa-solid fa-music category-icon"></i>
-                    <h3>Music</h3>
-                    <p>Suno & Udio prompts</p>
-                </div>
-                <div class="category-card glass-panel" data-category="social">
-                    <i class="fa-solid fa-hashtag category-icon"></i>
-                    <h3>Social Media</h3>
-                    <p>Viral posts & hooks</p>
-                </div>
-                <div class="category-card glass-panel" data-category="coding">
-                    <i class="fa-solid fa-code category-icon"></i>
-                    <h3>Coding</h3>
-                    <p>Dev tools & snippets</p>
-                </div>
-            </div>
-        </section>
-
-        <section id="prompts" class="fade-in">
-            <div class="prompts-header">
-                <h2 class="section-title">Latest Prompts <span id="current-category-label"></span></h2>
-                <div class="filter-controls">
-                    <button id="show-favorites" class="glass-btn"><i class="fa-solid fa-heart"></i> My Favorites</button>
-                    <button id="clear-filters" class="glass-btn hidden">Clear Filters</button>
-                </div>
-            </div>
+        <section id="prompts-section" class="fade-in-scroll">
             
-            <div id="prompt-container" class="prompt-grid"></div>
-            
-            <div id="pagination" class="pagination-container"></div>
-        </section>
+            <div class="filters-container">
+                <button class="filter-btn active" data-filter="All">All</button>
+                <button class="filter-btn" data-filter="Video">Video</button>
+                <button class="filter-btn" data-filter="Image">Image</button>
+                <button class="filter-btn" data-filter="Music">Music</button>
+                <button class="filter-btn" data-filter="Coding">Coding</button>
+                <button class="filter-btn" data-filter="Social">Social</button>
+                <button class="filter-btn highlight" data-filter="Favorites">
+                    <i class="fa-solid fa-heart"></i> Favorites
+                </button>
+            </div>
 
-        <section id="about" class="fade-in text-center">
-            <h2 class="section-title">About FreePrompt Hub</h2>
-            <p class="hero-desc">We curate the best prompts across the internet so you don't have to. Built for creators, developers, and AI enthusiasts.</p>
+            <div id="prompt-grid" class="prompt-grid">
+                </div>
+
+            <div id="pagination-controls" class="pagination-controls hidden">
+                <button id="prev-page" class="glass-btn"><i class="fa-solid fa-chevron-left"></i> Previous</button>
+                <span id="page-info" class="page-info">Page 1 of 1</span>
+                <button id="next-page" class="glass-btn">Next <i class="fa-solid fa-chevron-right"></i></button>
+            </div>
+
         </section>
     </main>
 
-    <footer>
+    <footer class="glass-panel">
         <div class="footer-content">
-            <div class="logo">
-                <i class="fa-solid fa-wand-magic-sparkles"></i> FreePrompt Hub
-            </div>
-            <div class="social-links">
-                <a href="#"><i class="fa-brands fa-twitter"></i></a>
-                <a href="#"><i class="fa-brands fa-github"></i></a>
-                <a href="#"><i class="fa-brands fa-discord"></i></a>
-            </div>
-        </div>
-        <div class="copyright">
-            &copy; 2026 FreePrompt Hub. All rights reserved. Built with HTML, CSS, and vanilla JS.
+            <p>&copy; 2026 FreePrompt Hub. All rights reserved.</p>
         </div>
     </footer>
 

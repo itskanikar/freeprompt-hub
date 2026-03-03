@@ -1,96 +1,233 @@
-// --- Mock Data: AI Prompts ---
-const promptData = [
-    { id: 1, category: 'coding', title: 'React Landing Page', desc: 'Generate a basic React component structure', text: 'Create a modern, responsive landing page using React and Tailwind CSS. Include a Hero section with a call-to-action, a Features grid (3 columns), and a Footer. Ensure it uses semantic HTML.' },
-    { id: 2, category: 'image', title: 'Cyberpunk Cityscape', desc: 'Midjourney prompt for a futuristic city', text: 'A hyper-realistic cyberpunk city street at night, neon lights reflecting in puddles, flying cars in the background, cinematic lighting, 8k resolution, photorealistic, --ar 16:9 --v 6.0' },
-    { id: 3, category: 'social', title: 'Viral Twitter Hook', desc: 'Hook templates for X/Twitter threads', text: 'Write 5 engaging Twitter hooks about [Topic]. The hooks should create an "information gap" and promise a specific outcome. Use formatting that stops the scroll.' },
-    { id: 4, category: 'video', title: 'Cinematic Drone Shot', desc: 'Sora/Runway prompt for drone footage', text: 'A smooth FPV drone shot flying through a dense, misty pine forest at sunrise. Sunbeams piercing through the trees, cinematic color grading, 4k resolution, 60fps.' },
-    { id: 5, category: 'music', title: 'Synthwave Track', desc: 'Suno/Udio prompt for retro music', text: 'Upbeat 80s synthwave track with a driving bassline, retro drum machines, and a soaring synthesizer melody. Neon aesthetic, energetic pacing, instrumental.' },
-    { id: 6, category: 'coding', title: 'Python Web Scraper', desc: 'BeautifulSoup script generator', text: 'Write a Python script using requests and BeautifulSoup to scrape product names and prices from an e-commerce page. Include error handling and output the data to a CSV file.' },
-    { id: 7, category: 'image', title: 'Minimalist Logo', desc: 'Clean vector logo concept', text: 'A minimalist, abstract logo for a tech startup named [Name]. Flat design, vector style, 2-color palette (navy and coral), clean lines, white background.' },
-    { id: 8, category: 'social', title: 'LinkedIn Success Post', desc: 'Professional milestone template', text: 'Write a relatable LinkedIn post about overcoming a recent professional failure. Structure it with an emotional hook, the story of the setback, 3 key lessons learned, and an uplifting conclusion.' },
-    { id: 9, category: 'video', title: 'Macro Nature', desc: 'Close-up slow motion prompt', text: 'Extreme macro slow-motion video of a water drop falling onto a vibrant green leaf, creating a perfect crown splash. High detail, shallow depth of field.' },
-    { id: 10, category: 'coding', title: 'SQL Query Optimizer', desc: 'Prompt to improve DB queries', text: 'Act as a senior database administrator. Analyze the following SQL query for performance bottlenecks and rewrite it for optimal execution speed. Explain the changes you made.' }
+/**
+ * Data Array: Dynamic Prompts
+ * Contains all the prompt information.
+ */
+const promptsData = [
+    { id: 1, category: 'Coding', title: 'React Landing Page', description: 'Generate a basic React component structure with Tailwind.', fullPrompt: 'Create a modern, responsive landing page using React and Tailwind CSS. Include a Hero section, Features grid, and a Footer. Ensure semantic HTML.' },
+    { id: 2, category: 'Image', title: 'Cyberpunk Cityscape', description: 'Midjourney prompt for a neon city.', fullPrompt: 'A hyper-realistic cyberpunk city street at night, neon lights reflecting in puddles, cinematic lighting, 8k resolution, photorealistic, --ar 16:9 --v 6.0' },
+    { id: 3, category: 'Social', title: 'Viral Twitter Hook', description: 'Hook templates for X/Twitter threads.', fullPrompt: 'Write 5 engaging Twitter hooks about [Topic]. The hooks should create an "information gap" and promise a specific outcome to stop the scroll.' },
+    { id: 4, category: 'Video', title: 'Cinematic Drone Shot', description: 'Sora/Runway prompt for drone footage.', fullPrompt: 'Smooth FPV drone shot flying through a dense misty pine forest at sunrise. Sunbeams piercing trees, cinematic color grading, 4k, 60fps.' },
+    { id: 5, category: 'Music', title: 'Synthwave Track', description: 'Suno/Udio prompt for retro music.', fullPrompt: 'Upbeat 80s synthwave track with a driving bassline, retro drum machines, and a soaring synthesizer melody. Energetic pacing, instrumental.' },
+    { id: 6, category: 'Coding', title: 'Python Web Scraper', description: 'BeautifulSoup script generator.', fullPrompt: 'Write a Python script using requests and BeautifulSoup to scrape product names and prices from an e-commerce page. Include error handling.' },
+    { id: 7, category: 'Image', title: 'Minimalist Logo', description: 'Clean vector logo concept.', fullPrompt: 'A minimalist abstract logo for a tech startup. Flat design, vector style, 2-color palette (navy and coral), clean lines, white background.' },
+    { id: 8, category: 'Social', title: 'LinkedIn Milestone', description: 'Professional success post template.', fullPrompt: 'Write a relatable LinkedIn post about overcoming a recent professional failure. Include an emotional hook, 3 key lessons, and an uplifting conclusion.' },
+    { id: 9, category: 'Video', title: 'Macro Nature', description: 'Close-up slow motion prompt.', fullPrompt: 'Extreme macro slow-motion video of a water drop falling onto a vibrant green leaf, creating a perfect crown splash. High detail, shallow depth of field.' },
+    { id: 10, category: 'Coding', title: 'SQL Optimizer', description: 'Prompt to improve DB queries.', fullPrompt: 'Act as a senior database administrator. Analyze the following SQL query for performance bottlenecks and rewrite it for optimal execution speed.' },
+    { id: 11, category: 'Image', title: 'Watercolor Portrait', description: 'Soft artistic portrait prompt.', fullPrompt: 'A beautiful watercolor portrait of a young woman with flowers in her hair, soft pastel colors, ethereal lighting, high detail, artistic style.' },
+    { id: 12, category: 'Music', title: 'Lo-Fi Chillhop', description: 'Relaxing background beats.', fullPrompt: 'Relaxing lo-fi chillhop beat with a slow tempo, vinyl crackle, soft piano chords, and a mellow hip-hop drum groove. Suitable for studying.' }
 ];
 
-// --- State Variables ---
-let currentPrompts = [...promptData];
-let currentPage = 1;
-const itemsPerPage = 6;
-let currentFilter = '';
-let currentCategory = '';
-let showingFavorites = false;
+// --- Application State ---
+let state = {
+    searchQuery: '',
+    categoryFilter: 'All', // 'All', 'Video', 'Image', 'Music', 'Coding', 'Social', 'Favorites'
+    currentPage: 1,
+    itemsPerPage: 6,
+    favorites: JSON.parse(localStorage.getItem('savedFavorites')) || []
+};
 
 // --- DOM Elements ---
-const promptContainer = document.getElementById('prompt-container');
-const paginationContainer = document.getElementById('pagination');
-const searchInput = document.getElementById('search-input');
-const categoryCards = document.querySelectorAll('.category-card');
-const clearFiltersBtn = document.getElementById('clear-filters');
-const categoryLabel = document.getElementById('current-category-label');
-const showFavoritesBtn = document.getElementById('show-favorites');
+const dom = {
+    loader: document.getElementById('loader'),
+    promptGrid: document.getElementById('prompt-grid'),
+    searchInput: document.getElementById('search-input'),
+    filterBtns: document.querySelectorAll('.filter-btn'),
+    prevBtn: document.getElementById('prev-page'),
+    nextBtn: document.getElementById('next-page'),
+    pageInfo: document.getElementById('page-info'),
+    paginationControls: document.getElementById('pagination-controls'),
+    toastContainer: document.getElementById('toast-container'),
+    themeToggle: document.getElementById('theme-toggle'),
+    themeIcon: document.getElementById('theme-icon')
+};
 
-// --- Initialize LocalStorage Favorites ---
-let favorites = JSON.parse(localStorage.getItem('favPrompts')) || [];
-
-// --- Functions ---
-
-// 1. Render Prompts
-function renderPrompts() {
-    promptContainer.innerHTML = '';
+// --- Initialization ---
+function init() {
+    setupTheme();
+    setupEventListeners();
+    setupScrollAnimations();
     
-    // Calculate Pagination
-    const startIndex = (currentPage - 1) * itemsPerPage;
-    const endIndex = startIndex + itemsPerPage;
-    const paginatedPrompts = currentPrompts.slice(startIndex, endIndex);
+    // Simulate initial loading time for visual effect
+    setTimeout(() => {
+        dom.loader.classList.add('hidden');
+        updateUI();
+    }, 800);
+}
 
-    if (paginatedPrompts.length === 0) {
-        promptContainer.innerHTML = `<p style="grid-column: 1/-1; text-align: center; color: var(--text-muted);">No prompts found. Try a different search.</p>`;
-        paginationContainer.innerHTML = '';
+// --- Core Logic ---
+
+/**
+ * Filters and paginates the data based on current state,
+ * then renders the resulting cards to the DOM.
+ */
+function updateUI() {
+    // 1. Filter Data
+    const filteredData = promptsData.filter(prompt => {
+        // Search Match
+        const searchLower = state.searchQuery.toLowerCase();
+        const matchesSearch = prompt.title.toLowerCase().includes(searchLower) || 
+                              prompt.fullPrompt.toLowerCase().includes(searchLower);
+        
+        // Category / Favorites Match
+        let matchesCategory = false;
+        if (state.categoryFilter === 'All') {
+            matchesCategory = true;
+        } else if (state.categoryFilter === 'Favorites') {
+            matchesCategory = state.favorites.includes(prompt.id);
+        } else {
+            matchesCategory = prompt.category === state.categoryFilter;
+        }
+
+        return matchesSearch && matchesCategory;
+    });
+
+    // 2. Calculate Pagination
+    const totalPages = Math.ceil(filteredData.length / state.itemsPerPage) || 1;
+    
+    // Ensure current page is valid after filtering
+    if (state.currentPage > totalPages) state.currentPage = totalPages;
+
+    const startIndex = (state.currentPage - 1) * state.itemsPerPage;
+    const paginatedData = filteredData.slice(startIndex, startIndex + state.itemsPerPage);
+
+    // 3. Render DOM (with smooth transition)
+    dom.promptGrid.classList.add('fading-out');
+    
+    setTimeout(() => {
+        renderCards(paginatedData);
+        renderPagination(totalPages, filteredData.length);
+        dom.promptGrid.classList.remove('fading-out');
+    }, 300); // Matches CSS transition time
+}
+
+/**
+ * Generates HTML for prompt cards and attaches listeners.
+ */
+function renderCards(data) {
+    dom.promptGrid.innerHTML = '';
+
+    if (data.length === 0) {
+        dom.promptGrid.innerHTML = `
+            <div style="grid-column: 1/-1; text-align: center; padding: 40px; color: var(--text-muted);">
+                <i class="fa-solid fa-ghost" style="font-size: 3rem; margin-bottom: 15px;"></i>
+                <h2>No prompts found</h2>
+                <p>Try adjusting your search or filters.</p>
+            </div>`;
         return;
     }
 
-    paginatedPrompts.forEach(prompt => {
-        const isFav = favorites.includes(prompt.id);
+    data.forEach(prompt => {
+        const isFav = state.favorites.includes(prompt.id);
         const card = document.createElement('div');
         card.className = 'prompt-card glass-panel';
+        
         card.innerHTML = `
-            <div class="prompt-header">
-                <span class="prompt-title">${prompt.title}</span>
-                <button class="fav-btn ${isFav ? 'active' : ''}" data-id="${prompt.id}" aria-label="Favorite">
+            <div class="card-header">
+                <div>
+                    <span class="category-badge">${prompt.category}</span>
+                    <h3 class="card-title">${prompt.title}</h3>
+                </div>
+                <button class="fav-btn ${isFav ? 'active' : ''}" data-id="${prompt.id}" aria-label="Toggle Favorite">
                     <i class="fa-${isFav ? 'solid' : 'regular'} fa-heart"></i>
                 </button>
             </div>
-            <p class="prompt-desc">${prompt.desc}</p>
-            <div class="prompt-box">${prompt.text}</div>
-            <button class="copy-btn" data-text="${prompt.text.replace(/"/g, '&quot;')}">
+            <p class="card-desc">${prompt.description}</p>
+            <div class="prompt-box">${prompt.fullPrompt}</div>
+            <button class="copy-btn" data-prompt="${prompt.fullPrompt.replace(/"/g, '&quot;')}">
                 <i class="fa-regular fa-copy"></i> Copy Prompt
             </button>
         `;
-        promptContainer.appendChild(card);
+        dom.promptGrid.appendChild(card);
     });
 
-    setupCardInteractions();
-    renderPagination();
+    attachCardListeners();
 }
 
-// 2. Setup Event Listeners inside Cards
-function setupCardInteractions() {
+/**
+ * Updates pagination buttons and text.
+ */
+function renderPagination(totalPages, totalItems) {
+    if (totalItems <= state.itemsPerPage) {
+        dom.paginationControls.classList.add('hidden');
+        return;
+    }
+    
+    dom.paginationControls.classList.remove('hidden');
+    dom.pageInfo.textContent = `Page ${state.currentPage} of ${totalPages}`;
+    
+    dom.prevBtn.disabled = state.currentPage === 1;
+    dom.nextBtn.disabled = state.currentPage === totalPages;
+}
+
+// --- Event Listeners & Interactions ---
+
+function setupEventListeners() {
+    // Live Search
+    dom.searchInput.addEventListener('input', (e) => {
+        state.searchQuery = e.target.value;
+        state.currentPage = 1;
+        updateUI();
+    });
+
+    // Category Filters
+    dom.filterBtns.forEach(btn => {
+        btn.addEventListener('click', (e) => {
+            // Update active styling
+            dom.filterBtns.forEach(b => b.classList.remove('active'));
+            e.currentTarget.classList.add('active');
+            
+            // Update state
+            state.categoryFilter = e.currentTarget.getAttribute('data-filter');
+            state.currentPage = 1;
+            updateUI();
+        });
+    });
+
+    // Pagination Buttons
+    dom.prevBtn.addEventListener('click', () => {
+        if (state.currentPage > 1) {
+            state.currentPage--;
+            updateUI();
+            scrollToPrompts();
+        }
+    });
+
+    dom.nextBtn.addEventListener('click', () => {
+        state.currentPage++;
+        updateUI();
+        scrollToPrompts();
+    });
+
+    // Theme Toggle
+    dom.themeToggle.addEventListener('click', toggleTheme);
+}
+
+/**
+ * Attaches event listeners to dynamically generated card elements.
+ */
+function attachCardListeners() {
     // Copy Buttons
     document.querySelectorAll('.copy-btn').forEach(btn => {
         btn.addEventListener('click', async (e) => {
-            const textToCopy = e.currentTarget.getAttribute('data-text');
+            const text = e.currentTarget.getAttribute('data-prompt');
+            const originalHTML = e.currentTarget.innerHTML;
+            
             try {
-                await navigator.clipboard.writeText(textToCopy);
-                const originalHTML = e.currentTarget.innerHTML;
+                await navigator.clipboard.writeText(text);
+                
+                // Button micro-interaction
                 e.currentTarget.innerHTML = '<i class="fa-solid fa-check"></i> Copied!';
-                e.currentTarget.classList.add('copied');
+                e.currentTarget.style.backgroundColor = '#10b981'; // Success Green
+                e.currentTarget.style.color = 'white';
+                
+                showToast('Prompt copied to clipboard!', 'success');
                 
                 setTimeout(() => {
                     e.currentTarget.innerHTML = originalHTML;
-                    e.currentTarget.classList.remove('copied');
+                    e.currentTarget.style = ''; // Reset styles
                 }, 2000);
             } catch (err) {
-                console.error('Failed to copy text: ', err);
+                showToast('Failed to copy prompt.', 'error');
             }
         });
     });
@@ -99,175 +236,103 @@ function setupCardInteractions() {
     document.querySelectorAll('.fav-btn').forEach(btn => {
         btn.addEventListener('click', (e) => {
             const id = parseInt(e.currentTarget.getAttribute('data-id'));
+            const index = state.favorites.indexOf(id);
             const icon = e.currentTarget.querySelector('i');
             
-            if (favorites.includes(id)) {
-                favorites = favorites.filter(favId => favId !== id);
-                e.currentTarget.classList.remove('active');
-                icon.classList.remove('fa-solid');
-                icon.classList.add('fa-regular');
-            } else {
-                favorites.push(id);
+            if (index === -1) {
+                // Add to favorites
+                state.favorites.push(id);
                 e.currentTarget.classList.add('active');
-                icon.classList.remove('fa-regular');
-                icon.classList.add('fa-solid');
+                icon.classList.replace('fa-regular', 'fa-solid');
+                showToast('Added to Favorites');
+            } else {
+                // Remove from favorites
+                state.favorites.splice(index, 1);
+                e.currentTarget.classList.remove('active');
+                icon.classList.replace('fa-solid', 'fa-regular');
+                showToast('Removed from Favorites');
+                
+                // If currently viewing favorites tab, instantly remove card
+                if (state.categoryFilter === 'Favorites') {
+                    updateUI();
+                }
             }
             
-            localStorage.setItem('favPrompts', JSON.stringify(favorites));
-            
-            // If currently filtering by favorites, re-render to remove it instantly
-            if (showingFavorites) {
-                applyFilters();
-            }
+            // Persist to local storage
+            localStorage.setItem('savedFavorites', JSON.stringify(state.favorites));
         });
     });
 }
 
-// 3. Render Pagination
-function renderPagination() {
-    paginationContainer.innerHTML = '';
-    const totalPages = Math.ceil(currentPrompts.length / itemsPerPage);
+// --- Utilities & Effects ---
 
-    if (totalPages <= 1) return;
-
-    for (let i = 1; i <= totalPages; i++) {
-        const btn = document.createElement('button');
-        btn.className = `page-btn ${i === currentPage ? 'active' : ''}`;
-        btn.innerText = i;
-        btn.addEventListener('click', () => {
-            currentPage = i;
-            renderPrompts();
-            document.getElementById('prompts').scrollIntoView({ behavior: 'smooth', block: 'start' });
-        });
-        paginationContainer.appendChild(btn);
-    }
-}
-
-// 4. Apply Search, Category, and Favorite Filters
-function applyFilters() {
-    currentPrompts = promptData.filter(prompt => {
-        const matchesSearch = prompt.title.toLowerCase().includes(currentFilter) || 
-                              prompt.text.toLowerCase().includes(currentFilter);
-        const matchesCategory = currentCategory === '' || prompt.category === currentCategory;
-        const matchesFav = !showingFavorites || favorites.includes(prompt.id);
-        
-        return matchesSearch && matchesCategory && matchesFav;
-    });
-
-    currentPage = 1; // Reset to first page
-    renderPrompts();
+/**
+ * Toast Notification System
+ */
+function showToast(message, type = 'info') {
+    const toast = document.createElement('div');
+    toast.className = 'toast';
     
-    // Toggle Clear Filters button visibility
-    if (currentFilter !== '' || currentCategory !== '' || showingFavorites) {
-        clearFiltersBtn.classList.remove('hidden');
-    } else {
-        clearFiltersBtn.classList.add('hidden');
+    // Optional: distinct colors based on type
+    if (type === 'success') toast.style.backgroundColor = '#10b981';
+    if (type === 'error') toast.style.backgroundColor = '#ef4444';
+
+    toast.innerHTML = `<i class="fa-solid fa-info-circle"></i> ${message}`;
+    dom.toastContainer.appendChild(toast);
+
+    // Trigger animation
+    setTimeout(() => toast.classList.add('show'), 10);
+
+    // Remove toast after 3 seconds
+    setTimeout(() => {
+        toast.classList.remove('show');
+        setTimeout(() => toast.remove(), 300); // Wait for transition out
+    }, 3000);
+}
+
+function scrollToPrompts() {
+    document.getElementById('prompts-section').scrollIntoView({ behavior: 'smooth', block: 'start' });
+}
+
+/**
+ * Dark/Light Mode Theming
+ */
+function setupTheme() {
+    if (localStorage.getItem('theme') === 'light') {
+        document.body.classList.add('light-mode');
+        dom.themeIcon.classList.replace('fa-sun', 'fa-moon');
     }
 }
 
-// --- Event Listeners ---
-
-// Search
-searchInput.addEventListener('input', (e) => {
-    currentFilter = e.target.value.toLowerCase();
-    applyFilters();
-});
-
-// Category Click
-categoryCards.forEach(card => {
-    card.addEventListener('click', () => {
-        currentCategory = card.getAttribute('data-category');
-        categoryLabel.innerText = `- ${currentCategory.charAt(0).toUpperCase() + currentCategory.slice(1)}`;
-        showingFavorites = false;
-        applyFilters();
-        document.getElementById('prompts').scrollIntoView({ behavior: 'smooth' });
-    });
-});
-
-// Show Favorites
-showFavoritesBtn.addEventListener('click', () => {
-    showingFavorites = true;
-    currentCategory = '';
-    currentFilter = '';
-    searchInput.value = '';
-    categoryLabel.innerText = '- Favorites';
-    applyFilters();
-});
-
-// Clear Filters
-clearFiltersBtn.addEventListener('click', () => {
-    currentFilter = '';
-    currentCategory = '';
-    showingFavorites = false;
-    searchInput.value = '';
-    categoryLabel.innerText = '';
-    applyFilters();
-});
-
-// Theme Toggle
-const themeBtn = document.getElementById('theme-toggle');
-const themeIcon = document.getElementById('theme-icon');
-
-// Check LocalStorage for Theme
-if (localStorage.getItem('theme') === 'light') {
-    document.body.classList.add('light-mode');
-    themeIcon.classList.replace('fa-sun', 'fa-moon');
-}
-
-themeBtn.addEventListener('click', () => {
+function toggleTheme() {
     document.body.classList.toggle('light-mode');
-    if (document.body.classList.contains('light-mode')) {
-        themeIcon.classList.replace('fa-sun', 'fa-moon');
+    const isLight = document.body.classList.contains('light-mode');
+    
+    if (isLight) {
+        dom.themeIcon.classList.replace('fa-sun', 'fa-moon');
         localStorage.setItem('theme', 'light');
     } else {
-        themeIcon.classList.replace('fa-moon', 'fa-sun');
+        dom.themeIcon.classList.replace('fa-moon', 'fa-sun');
         localStorage.setItem('theme', 'dark');
     }
-});
+}
 
-// Floating Navbar & Scroll Spy
-const header = document.getElementById('header');
-window.addEventListener('scroll', () => {
-    if (window.scrollY > 50) {
-        header.classList.add('scrolled');
-    } else {
-        header.classList.remove('scrolled');
-    }
-});
+/**
+ * Intersection Observer for scroll animations
+ */
+function setupScrollAnimations() {
+    const fadeElements = document.querySelectorAll('.fade-in-scroll');
+    const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                entry.target.classList.add('visible');
+                observer.unobserve(entry.target);
+            }
+        });
+    }, { threshold: 0.1 });
 
-// Mobile Menu Toggle
-const mobileBtn = document.getElementById('mobile-menu-btn');
-const navMenu = document.getElementById('nav-menu');
+    fadeElements.forEach(el => observer.observe(el));
+}
 
-mobileBtn.addEventListener('click', () => {
-    navMenu.classList.toggle('active');
-});
-
-// Close mobile menu on link click
-document.querySelectorAll('.nav-link').forEach(link => {
-    link.addEventListener('click', () => {
-        navMenu.classList.remove('active');
-    });
-});
-
-// Scroll Fade-In Animation (Intersection Observer)
-const fadeElements = document.querySelectorAll('.fade-in');
-const appearOptions = {
-    threshold: 0.15,
-    rootMargin: "0px 0px -50px 0px"
-};
-
-const appearOnScroll = new IntersectionObserver(function(entries, observer) {
-    entries.forEach(entry => {
-        if (!entry.isIntersecting) return;
-        entry.target.classList.add('visible');
-        observer.unobserve(entry.target);
-    });
-}, appearOptions);
-
-fadeElements.forEach(el => {
-    appearOnScroll.observe(el);
-});
-
-// Initial Render
-renderPrompts();
+// Start Application
+document.addEventListener('DOMContentLoaded', init);

@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>FreePrompt Hub | Dynamic</title>
+    <title>FreePrompt Hub | Dynamic AI Filters</title>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link rel="stylesheet" href="style.css">
@@ -15,7 +15,6 @@
     </div>
 
     <div id="toast-container" class="toast-container"></div>
-
     <div class="bg-animated"></div>
 
     <header id="header" class="glass-nav">
@@ -36,7 +35,7 @@
     <main>
         <section id="home" class="hero fade-in-scroll">
             <h1 class="hero-title">Free AI Prompts for <span class="text-gradient">Creators</span></h1>
-            <p class="hero-desc">Discover, save, and copy high-quality prompts to supercharge your AI workflow.</p>
+            <p class="hero-desc">Filter by Category and AI Model to find exactly what you need.</p>
             
             <div class="search-wrapper glass-panel">
                 <i class="fa-solid fa-search search-icon"></i>
@@ -47,26 +46,35 @@
         <section id="prompts-section" class="fade-in-scroll">
             
             <div class="filters-container">
-                <button class="filter-btn active" data-filter="All">All</button>
-                <button class="filter-btn" data-filter="Video">Video</button>
-                <button class="filter-btn" data-filter="Image">Image</button>
-                <button class="filter-btn" data-filter="Music">Music</button>
-                <button class="filter-btn" data-filter="Coding">Coding</button>
-                <button class="filter-btn" data-filter="Social">Social</button>
-                <button class="filter-btn highlight" data-filter="Favorites">
+                <span class="filter-label">Category:</span>
+                <button class="filter-btn active" data-type="category" data-filter="All">All</button>
+                <button class="filter-btn" data-type="category" data-filter="Coding">Coding</button>
+                <button class="filter-btn" data-type="category" data-filter="Image">Image</button>
+                <button class="filter-btn" data-type="category" data-filter="Video">Video</button>
+                <button class="filter-btn" data-type="category" data-filter="Music">Music</button>
+                <button class="filter-btn" data-type="category" data-filter="Writing">Writing</button>
+                <button class="filter-btn highlight" data-type="category" data-filter="Favorites">
                     <i class="fa-solid fa-heart"></i> Favorites
                 </button>
             </div>
 
-            <div id="prompt-grid" class="prompt-grid">
-                </div>
+            <div class="filters-container ai-filters">
+                <span class="filter-label">AI Model:</span>
+                <button class="filter-btn ai-btn active" data-type="ai" data-filter="All">All Models</button>
+                <button class="filter-btn ai-btn" data-type="ai" data-filter="ChatGPT">ChatGPT</button>
+                <button class="filter-btn ai-btn" data-type="ai" data-filter="Claude">Claude</button>
+                <button class="filter-btn ai-btn" data-type="ai" data-filter="Midjourney">Midjourney</button>
+                <button class="filter-btn ai-btn" data-type="ai" data-filter="Runway">Runway</button>
+                <button class="filter-btn ai-btn" data-type="ai" data-filter="Suno">Suno</button>
+            </div>
+
+            <div id="prompt-grid" class="prompt-grid"></div>
 
             <div id="pagination-controls" class="pagination-controls hidden">
-                <button id="prev-page" class="glass-btn"><i class="fa-solid fa-chevron-left"></i> Previous</button>
+                <button id="prev-page" class="glass-btn"><i class="fa-solid fa-chevron-left"></i> Prev</button>
                 <span id="page-info" class="page-info">Page 1 of 1</span>
                 <button id="next-page" class="glass-btn">Next <i class="fa-solid fa-chevron-right"></i></button>
             </div>
-
         </section>
     </main>
 

@@ -1,26 +1,49 @@
 /**
- * Data Array: Dynamic Prompts
- * Contains all the prompt information.
+ * Data Array: Dynamic Prompts with Categories & AI Names
+ * Add your remaining prompts here using this exact format.
  */
 const promptsData = [
-    { id: 1, category: 'Coding', title: 'React Landing Page', description: 'Generate a basic React component structure with Tailwind.', fullPrompt: 'Create a modern, responsive landing page using React and Tailwind CSS. Include a Hero section, Features grid, and a Footer. Ensure semantic HTML.' },
-    { id: 2, category: 'Image', title: 'Cyberpunk Cityscape', description: 'Midjourney prompt for a neon city.', fullPrompt: 'A hyper-realistic cyberpunk city street at night, neon lights reflecting in puddles, cinematic lighting, 8k resolution, photorealistic, --ar 16:9 --v 6.0' },
-    { id: 3, category: 'Social', title: 'Viral Twitter Hook', description: 'Hook templates for X/Twitter threads.', fullPrompt: 'Write 5 engaging Twitter hooks about [Topic]. The hooks should create an "information gap" and promise a specific outcome to stop the scroll.' },
-    { id: 4, category: 'Video', title: 'Cinematic Drone Shot', description: 'Sora/Runway prompt for drone footage.', fullPrompt: 'Smooth FPV drone shot flying through a dense misty pine forest at sunrise. Sunbeams piercing trees, cinematic color grading, 4k, 60fps.' },
-    { id: 5, category: 'Music', title: 'Synthwave Track', description: 'Suno/Udio prompt for retro music.', fullPrompt: 'Upbeat 80s synthwave track with a driving bassline, retro drum machines, and a soaring synthesizer melody. Energetic pacing, instrumental.' },
-    { id: 6, category: 'Coding', title: 'Python Web Scraper', description: 'BeautifulSoup script generator.', fullPrompt: 'Write a Python script using requests and BeautifulSoup to scrape product names and prices from an e-commerce page. Include error handling.' },
-    { id: 7, category: 'Image', title: 'Minimalist Logo', description: 'Clean vector logo concept.', fullPrompt: 'A minimalist abstract logo for a tech startup. Flat design, vector style, 2-color palette (navy and coral), clean lines, white background.' },
-    { id: 8, category: 'Social', title: 'LinkedIn Milestone', description: 'Professional success post template.', fullPrompt: 'Write a relatable LinkedIn post about overcoming a recent professional failure. Include an emotional hook, 3 key lessons, and an uplifting conclusion.' },
-    { id: 9, category: 'Video', title: 'Macro Nature', description: 'Close-up slow motion prompt.', fullPrompt: 'Extreme macro slow-motion video of a water drop falling onto a vibrant green leaf, creating a perfect crown splash. High detail, shallow depth of field.' },
-    { id: 10, category: 'Coding', title: 'SQL Optimizer', description: 'Prompt to improve DB queries.', fullPrompt: 'Act as a senior database administrator. Analyze the following SQL query for performance bottlenecks and rewrite it for optimal execution speed.' },
-    { id: 11, category: 'Image', title: 'Watercolor Portrait', description: 'Soft artistic portrait prompt.', fullPrompt: 'A beautiful watercolor portrait of a young woman with flowers in her hair, soft pastel colors, ethereal lighting, high detail, artistic style.' },
-    { id: 12, category: 'Music', title: 'Lo-Fi Chillhop', description: 'Relaxing background beats.', fullPrompt: 'Relaxing lo-fi chillhop beat with a slow tempo, vinyl crackle, soft piano chords, and a mellow hip-hop drum groove. Suitable for studying.' }
+    // --- ChatGPT (Coding/Writing) ---
+    { id: 1, category: 'Coding', aiName: 'ChatGPT', title: 'React Expert', description: 'Setup a modern React architecture.', fullPrompt: 'Act as a Senior React Developer. Set up a folder structure for a highly scalable Next.js application using Tailwind CSS and TypeScript. Explain the reasoning behind your structure.' },
+    { id: 2, category: 'Writing', aiName: 'ChatGPT', title: 'Tone Mimic', description: 'Train AI to write in your exact voice.', fullPrompt: 'Analyze the tone, pacing, and vocabulary of the following text block. Then, write a 500-word blog post about [Topic] using that exact same voice: [Insert your text here].' },
+    { id: 3, category: 'Coding', aiName: 'ChatGPT', title: 'Code Reviewer', description: 'Find bugs and optimize logic.', fullPrompt: 'Review the following block of code for security vulnerabilities, performance bottlenecks, and readability. Suggest refactored code and explain your changes: [Insert Code].' },
+    { id: 4, category: 'Writing', aiName: 'ChatGPT', title: 'SEO Article', description: 'Generate an SEO-optimized blog.', fullPrompt: 'Write a 1200-word SEO article about [Topic]. Include naturally integrated LSI keywords, an engaging introduction, bulleted lists for readability, and a strong call-to-action at the end.' },
+    { id: 5, category: 'Coding', aiName: 'ChatGPT', title: 'Regex Generator', description: 'Generate complex regular expressions.', fullPrompt: 'Create a Regular Expression (Regex) in JavaScript that extracts [specific data, e.g., all email addresses ending in @gmail.com] from a block of text. Provide test cases.' },
+
+    // --- Claude (Writing/Analysis) ---
+    { id: 6, category: 'Writing', aiName: 'Claude', title: 'Contract Summarizer', description: 'Simplify complex legal documents.', fullPrompt: 'Read the following legal contract and summarize the key obligations, liabilities, and termination clauses in simple, 8th-grade English. Highlight any red flags: [Insert Contract].' },
+    { id: 7, category: 'Writing', aiName: 'Claude', title: 'Creative Brainstorm', description: 'Generate unique plot ideas.', fullPrompt: 'Brainstorm 10 unique, high-concept sci-fi story premises that deal with the ethical implications of time travel. Avoid common tropes like the grandfather paradox.' },
+    { id: 8, category: 'Coding', aiName: 'Claude', title: 'Data Analysis', description: 'Extract insights from raw data.', fullPrompt: 'Act as a Data Scientist. Analyze this dataset of [Subject]. Identify the top 3 trends, any statistical anomalies, and suggest what business decisions should be made based on this data: [Insert CSV/JSON].' },
+    { id: 9, category: 'Writing', aiName: 'Claude', title: 'Debate Prep', description: 'Argue both sides of a topic.', fullPrompt: 'Provide a comprehensive debate brief on the topic of [Topic]. Give me the 3 strongest arguments in favor, the 3 strongest arguments against, and rebuttals for each point.' },
+    { id: 10, category: 'Writing', aiName: 'Claude', title: 'Email De-escalation', description: 'Handle angry client emails.', fullPrompt: 'Rewrite the following email response to an angry client. Make it highly empathetic, professional, and solution-oriented, while maintaining firm boundaries: [Insert Draft].' },
+
+    // --- Midjourney (Image) ---
+    { id: 11, category: 'Image', aiName: 'Midjourney', title: 'Cinematic Portrait', description: 'Ultra-realistic photography.', fullPrompt: 'Cinematic portrait of a [Subject], shot on 35mm film, anamorphic lens, moody volumetric lighting, cyberpunk neon color palette, photorealistic, highly detailed, --ar 16:9 --style raw --v 6.0' },
+    { id: 12, category: 'Image', aiName: 'Midjourney', title: 'Flat Vector Logo', description: 'Clean minimal logo design.', fullPrompt: 'Minimalist flat vector logo of a [Subject/Animal], geometric shapes, vibrant gradients on dark background, modern tech startup style, white background, no text, --no shading --v 6.0' },
+    { id: 13, category: 'Image', aiName: 'Midjourney', title: 'Isometric Room', description: 'Cute 3D isometric designs.', fullPrompt: 'A cute isometric 3D render of a cozy gamer bedroom, soft pastel lighting, detailed props, octane render, unreal engine 5, claymation style, --ar 1:1 --v 6.0' },
+    { id: 14, category: 'Image', aiName: 'Midjourney', title: 'Watercolor Fantasy', description: 'Soft artistic landscape.', fullPrompt: 'Ethereal watercolor painting of a giant glowing tree in a misty fantasy forest, soft brush strokes, pastel colors, studio ghibli style, magical atmosphere, --ar 3:2 --niji 6' },
+    { id: 15, category: 'Image', aiName: 'Midjourney', title: 'Product Photography', description: 'Commercial product shots.', fullPrompt: 'Commercial product photography of a sleek glass perfume bottle resting on a black marble pedestal, splashing water behind it, dramatic studio lighting, 8k resolution, macro photography --ar 4:5' },
+
+    // --- Runway (Video) ---
+    { id: 16, category: 'Video', aiName: 'Runway', title: 'Drone Flythrough', description: 'Smooth FPV camera movement.', fullPrompt: 'Smooth FPV drone flight through the ruins of an ancient overgrown temple, cinematic lighting, dense jungle fog, sunbeams, photorealistic, 4k, slow motion.' },
+    { id: 17, category: 'Video', aiName: 'Runway', title: 'Macro Fluid Dynamics', description: 'Close up colorful liquid.', fullPrompt: 'Extreme macro slow-motion shot of metallic gold and neon pink paint mixing together. Vibrant colors, high contrast, shallow depth of field, fluid dynamics.' },
+    { id: 18, category: 'Video', aiName: 'Runway', title: 'Character Morph', description: 'Cyberpunk face transformation.', fullPrompt: 'A close up portrait of a normal human face seamlessly morphing into a robotic cyborg face. Glowing neon eyes, metallic skin appearing, cinematic lighting.' },
+    { id: 19, category: 'Video', aiName: 'Runway', title: 'Time Lapse City', description: 'Fast moving clouds and traffic.', fullPrompt: 'A dramatic day-to-night time-lapse of a futuristic metropolis. Flying cars leaving light trails, clouds rushing over skyscrapers, neon lights turning on, 8k.' },
+    { id: 20, category: 'Video', aiName: 'Runway', title: 'Fire Simulation', description: 'Realistic burning effects.', fullPrompt: 'A slow-motion close up of a roaring campfire in the dark. Highly detailed embers floating in the air, realistic physics, bright orange and blue flames.' },
+
+    // --- Suno (Music) ---
+    { id: 21, category: 'Music', aiName: 'Suno', title: 'Epic Orchestral', description: 'Movie soundtrack style.', fullPrompt: 'Epic cinematic orchestral soundtrack, Hans Zimmer style, building tension, massive brass sections, pounding taiko drums, sweeping string melodies, instrumental.' },
+    { id: 22, category: 'Music', aiName: 'Suno', title: 'Lo-Fi Study Beat', description: 'Relaxing background music.', fullPrompt: 'Chill lo-fi hip hop beat, slow tempo, warm vinyl crackle, gentle electric piano chords, smooth deep bass, rainy day atmosphere, instrumental.' },
+    { id: 23, category: 'Music', aiName: 'Suno', title: 'Synthwave Banger', description: '80s retro driving music.', fullPrompt: 'Upbeat 1980s synthwave, fast tempo, driving arpeggiated bassline, retro drum machine, soaring synth lead, neon cyberpunk aesthetic, energetic.' },
+    { id: 24, category: 'Music', aiName: 'Suno', title: 'Acoustic Folk', description: 'Warm vocals and guitar.', fullPrompt: 'Warm acoustic indie folk song, male vocal, intimate fingerpicked acoustic guitar, gentle tambourine, melancholic but hopeful lyrics about traveling.' },
+    { id: 25, category: 'Music', aiName: 'Suno', title: 'Heavy Metal Riff', description: 'Aggressive guitar track.', fullPrompt: 'Aggressive modern heavy metal track, drop-tuned distorted guitars, blast beat drumming, intense pacing, dark atmosphere, instrumental.' }
 ];
 
 // --- Application State ---
 let state = {
     searchQuery: '',
-    categoryFilter: 'All', // 'All', 'Video', 'Image', 'Music', 'Coding', 'Social', 'Favorites'
+    categoryFilter: 'All', 
+    aiFilter: 'All',       
     currentPage: 1,
     itemsPerPage: 6,
     favorites: JSON.parse(localStorage.getItem('savedFavorites')) || []
@@ -41,34 +64,24 @@ const dom = {
     themeIcon: document.getElementById('theme-icon')
 };
 
-// --- Initialization ---
 function init() {
     setupTheme();
     setupEventListeners();
-    setupScrollAnimations();
-    
-    // Simulate initial loading time for visual effect
     setTimeout(() => {
         dom.loader.classList.add('hidden');
         updateUI();
     }, 800);
 }
 
-// --- Core Logic ---
-
-/**
- * Filters and paginates the data based on current state,
- * then renders the resulting cards to the DOM.
- */
 function updateUI() {
-    // 1. Filter Data
+    // 1. Dual-Filter Logic
     const filteredData = promptsData.filter(prompt => {
         // Search Match
         const searchLower = state.searchQuery.toLowerCase();
         const matchesSearch = prompt.title.toLowerCase().includes(searchLower) || 
                               prompt.fullPrompt.toLowerCase().includes(searchLower);
         
-        // Category / Favorites Match
+        // Category Match (Handles Favorites too)
         let matchesCategory = false;
         if (state.categoryFilter === 'All') {
             matchesCategory = true;
@@ -78,31 +91,32 @@ function updateUI() {
             matchesCategory = prompt.category === state.categoryFilter;
         }
 
-        return matchesSearch && matchesCategory;
+        // AI Model Match
+        let matchesAI = false;
+        if (state.aiFilter === 'All') {
+            matchesAI = true;
+        } else {
+            matchesAI = prompt.aiName === state.aiFilter;
+        }
+
+        return matchesSearch && matchesCategory && matchesAI;
     });
 
-    // 2. Calculate Pagination
     const totalPages = Math.ceil(filteredData.length / state.itemsPerPage) || 1;
-    
-    // Ensure current page is valid after filtering
     if (state.currentPage > totalPages) state.currentPage = totalPages;
 
     const startIndex = (state.currentPage - 1) * state.itemsPerPage;
     const paginatedData = filteredData.slice(startIndex, startIndex + state.itemsPerPage);
 
-    // 3. Render DOM (with smooth transition)
     dom.promptGrid.classList.add('fading-out');
     
     setTimeout(() => {
         renderCards(paginatedData);
         renderPagination(totalPages, filteredData.length);
         dom.promptGrid.classList.remove('fading-out');
-    }, 300); // Matches CSS transition time
+    }, 300);
 }
 
-/**
- * Generates HTML for prompt cards and attaches listeners.
- */
 function renderCards(data) {
     dom.promptGrid.innerHTML = '';
 
@@ -111,7 +125,7 @@ function renderCards(data) {
             <div style="grid-column: 1/-1; text-align: center; padding: 40px; color: var(--text-muted);">
                 <i class="fa-solid fa-ghost" style="font-size: 3rem; margin-bottom: 15px;"></i>
                 <h2>No prompts found</h2>
-                <p>Try adjusting your search or filters.</p>
+                <p>Try adjusting your category or AI model filters.</p>
             </div>`;
         return;
     }
@@ -124,10 +138,13 @@ function renderCards(data) {
         card.innerHTML = `
             <div class="card-header">
                 <div>
-                    <span class="category-badge">${prompt.category}</span>
+                    <div class="badges-wrapper">
+                        <span class="category-badge">${prompt.category}</span>
+                        <span class="ai-badge"><i class="fa-solid fa-robot"></i> ${prompt.aiName}</span>
+                    </div>
                     <h3 class="card-title">${prompt.title}</h3>
                 </div>
-                <button class="fav-btn ${isFav ? 'active' : ''}" data-id="${prompt.id}" aria-label="Toggle Favorite">
+                <button class="fav-btn ${isFav ? 'active' : ''}" data-id="${prompt.id}">
                     <i class="fa-${isFav ? 'solid' : 'regular'} fa-heart"></i>
                 </button>
             </div>
@@ -143,9 +160,6 @@ function renderCards(data) {
     attachCardListeners();
 }
 
-/**
- * Updates pagination buttons and text.
- */
 function renderPagination(totalPages, totalItems) {
     if (totalItems <= state.itemsPerPage) {
         dom.paginationControls.classList.add('hidden');
@@ -154,36 +168,35 @@ function renderPagination(totalPages, totalItems) {
     
     dom.paginationControls.classList.remove('hidden');
     dom.pageInfo.textContent = `Page ${state.currentPage} of ${totalPages}`;
-    
     dom.prevBtn.disabled = state.currentPage === 1;
     dom.nextBtn.disabled = state.currentPage === totalPages;
 }
 
-// --- Event Listeners & Interactions ---
-
 function setupEventListeners() {
-    // Live Search
     dom.searchInput.addEventListener('input', (e) => {
         state.searchQuery = e.target.value;
         state.currentPage = 1;
         updateUI();
     });
 
-    // Category Filters
     dom.filterBtns.forEach(btn => {
         btn.addEventListener('click', (e) => {
-            // Update active styling
-            dom.filterBtns.forEach(b => b.classList.remove('active'));
+            const type = e.currentTarget.getAttribute('data-type');
+            const filterValue = e.currentTarget.getAttribute('data-filter');
+
+            // Handle UI highlighting based on which row was clicked
+            document.querySelectorAll(`.filter-btn[data-type="${type}"]`).forEach(b => b.classList.remove('active'));
             e.currentTarget.classList.add('active');
             
-            // Update state
-            state.categoryFilter = e.currentTarget.getAttribute('data-filter');
+            // Update the correct state variable
+            if (type === 'category') state.categoryFilter = filterValue;
+            if (type === 'ai') state.aiFilter = filterValue;
+            
             state.currentPage = 1;
             updateUI();
         });
     });
 
-    // Pagination Buttons
     dom.prevBtn.addEventListener('click', () => {
         if (state.currentPage > 1) {
             state.currentPage--;
@@ -198,15 +211,10 @@ function setupEventListeners() {
         scrollToPrompts();
     });
 
-    // Theme Toggle
     dom.themeToggle.addEventListener('click', toggleTheme);
 }
 
-/**
- * Attaches event listeners to dynamically generated card elements.
- */
 function attachCardListeners() {
-    // Copy Buttons
     document.querySelectorAll('.copy-btn').forEach(btn => {
         btn.addEventListener('click', async (e) => {
             const text = e.currentTarget.getAttribute('data-prompt');
@@ -214,25 +222,21 @@ function attachCardListeners() {
             
             try {
                 await navigator.clipboard.writeText(text);
-                
-                // Button micro-interaction
                 e.currentTarget.innerHTML = '<i class="fa-solid fa-check"></i> Copied!';
-                e.currentTarget.style.backgroundColor = '#10b981'; // Success Green
+                e.currentTarget.style.backgroundColor = '#10b981'; 
                 e.currentTarget.style.color = 'white';
-                
-                showToast('Prompt copied to clipboard!', 'success');
+                showToast('Prompt copied!', 'success');
                 
                 setTimeout(() => {
                     e.currentTarget.innerHTML = originalHTML;
-                    e.currentTarget.style = ''; // Reset styles
+                    e.currentTarget.style = ''; 
                 }, 2000);
             } catch (err) {
-                showToast('Failed to copy prompt.', 'error');
+                showToast('Failed to copy', 'error');
             }
         });
     });
 
-    // Favorite Buttons
     document.querySelectorAll('.fav-btn').forEach(btn => {
         btn.addEventListener('click', (e) => {
             const id = parseInt(e.currentTarget.getAttribute('data-id'));
@@ -240,53 +244,35 @@ function attachCardListeners() {
             const icon = e.currentTarget.querySelector('i');
             
             if (index === -1) {
-                // Add to favorites
                 state.favorites.push(id);
                 e.currentTarget.classList.add('active');
                 icon.classList.replace('fa-regular', 'fa-solid');
                 showToast('Added to Favorites');
             } else {
-                // Remove from favorites
                 state.favorites.splice(index, 1);
                 e.currentTarget.classList.remove('active');
                 icon.classList.replace('fa-solid', 'fa-regular');
                 showToast('Removed from Favorites');
-                
-                // If currently viewing favorites tab, instantly remove card
-                if (state.categoryFilter === 'Favorites') {
-                    updateUI();
-                }
+                if (state.categoryFilter === 'Favorites') updateUI();
             }
             
-            // Persist to local storage
             localStorage.setItem('savedFavorites', JSON.stringify(state.favorites));
         });
     });
 }
 
-// --- Utilities & Effects ---
-
-/**
- * Toast Notification System
- */
 function showToast(message, type = 'info') {
     const toast = document.createElement('div');
     toast.className = 'toast';
-    
-    // Optional: distinct colors based on type
     if (type === 'success') toast.style.backgroundColor = '#10b981';
     if (type === 'error') toast.style.backgroundColor = '#ef4444';
 
     toast.innerHTML = `<i class="fa-solid fa-info-circle"></i> ${message}`;
     dom.toastContainer.appendChild(toast);
-
-    // Trigger animation
     setTimeout(() => toast.classList.add('show'), 10);
-
-    // Remove toast after 3 seconds
     setTimeout(() => {
         toast.classList.remove('show');
-        setTimeout(() => toast.remove(), 300); // Wait for transition out
+        setTimeout(() => toast.remove(), 300);
     }, 3000);
 }
 
@@ -294,9 +280,6 @@ function scrollToPrompts() {
     document.getElementById('prompts-section').scrollIntoView({ behavior: 'smooth', block: 'start' });
 }
 
-/**
- * Dark/Light Mode Theming
- */
 function setupTheme() {
     if (localStorage.getItem('theme') === 'light') {
         document.body.classList.add('light-mode');
@@ -307,7 +290,6 @@ function setupTheme() {
 function toggleTheme() {
     document.body.classList.toggle('light-mode');
     const isLight = document.body.classList.contains('light-mode');
-    
     if (isLight) {
         dom.themeIcon.classList.replace('fa-sun', 'fa-moon');
         localStorage.setItem('theme', 'light');
@@ -317,22 +299,4 @@ function toggleTheme() {
     }
 }
 
-/**
- * Intersection Observer for scroll animations
- */
-function setupScrollAnimations() {
-    const fadeElements = document.querySelectorAll('.fade-in-scroll');
-    const observer = new IntersectionObserver((entries) => {
-        entries.forEach(entry => {
-            if (entry.isIntersecting) {
-                entry.target.classList.add('visible');
-                observer.unobserve(entry.target);
-            }
-        });
-    }, { threshold: 0.1 });
-
-    fadeElements.forEach(el => observer.observe(el));
-}
-
-// Start Application
 document.addEventListener('DOMContentLoaded', init);
